@@ -1,7 +1,7 @@
 docker run busybox echo hi there
 docker run busybox ping google.com
 
-docker run prune
+docker system prune
 
 docker create busybox echo hi there
 docker start -a #ID
