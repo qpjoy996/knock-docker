@@ -2,8 +2,8 @@
 version: '3.1'
 
 services:
-
-  mongodb:
+  mongo:
+    container_name: mongo
     image: mongo:3.4.2
     restart: always
     environment:
@@ -23,10 +23,14 @@ services:
     command: mongod
 
   mongo-express:
+    container_name: mongo-express
     image: mongo-express
     restart: always
     ports:
       - 8081:8081
+    links:
+      - "mongo"
     environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
