@@ -1,0 +1,49 @@
+# https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-compose
+# macOS: export GITLAB_HOME=$HOME
+# Linux: export GITLAB_HOME=/srv
+# 可以将根据系统将 export 加入到 .bashrc or .zshrc
+# 需要配置hosts: 127.0.0.1   gitlab.go4.so
+version: "3.3"
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    privileged: true
+    restart: always
+    hostname: 'gitlab.go4.so'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.go4.so:8480'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - "2422:22"
+      - "8480:80"
+      - "8443:443"
+    volumes:
+      - gitlab_data:/var/opt/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_config:/etc/gitlab
+    networks:
+      - gitlab
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    container_name: gitlab-runner
+    restart: always
+    depends_on:
+      - gitlab
+    volumes:
+      - gl_runner_config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - gitlab
+
+networks:
+  gitlab:
+    driver: bridge
+
+volumes:
+  gitlab_config:
+  gitlab_data:
+  gitlab_logs:
+  gl_runner_config:
