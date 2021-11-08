@@ -6,11 +6,12 @@ services:
     container_name: jenkins-server
     privileged: true
     hostname: jenkinsserver
+    restart: unless-stopped
     user: root
     labels:
       com.example.description: "Jenkins-Server by DigitalAvenue.dev"
     ports: 
-      - "18080:8080"
+      - "38880:8080"
       - "50000:50000"
     networks:
       jenkins-net:

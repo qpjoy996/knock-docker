@@ -2,16 +2,17 @@ version: "3.0"
 services:
   web:
     image: "gitlab/gitlab-ce:latest"
-    restart: always
-    hostname: "gitlab.example.com"
+    restart: unless-stopped
+    hostname: "gitlab.go4.so"
     privileged: true
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'gitlab.example.com'
-        # gitlab_rails['gitlab_shell_ssh_port'] = 2222
+        external_url 'gitlab.go4.so'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
     ports:
-      - '80:80'
-      - '443:443'
+      - '38080:80'
+      - '38443:443'
+      - '38022:22'
     volumes:
     - 'gitlab_config:/etc/gitlab'
     - 'gitlab_logs:/var/log/gitlab'
