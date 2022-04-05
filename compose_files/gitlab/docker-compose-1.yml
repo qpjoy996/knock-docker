@@ -20,14 +20,14 @@ services:
         # nginx['hsts_include_subdomains'] = false
 
         # https://docs.gitlab.com/omnibus/settings/database.html#using-a-non-packaged-postgresql-database-management-server
-        # postgresql['enable'] = false
-        # gitlab_rails['db_adapter'] = 'postgresql'
-        # gitlab_rails['db_encoding'] = 'utf8'
-        # gitlab_rails['db_host'] = 'my-aurora-cluster-here.rds.amazonaws.com'
-        # gitlab_rails['db_port'] = 5432
-        # gitlab_rails['db_username'] = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-        # gitlab_rails['db_password'] = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-        # gitlab_rails['db_database'] = 'gitlabdb'
+        postgresql['enable'] = false
+        gitlab_rails['db_adapter'] = 'postgresql'
+        gitlab_rails['db_encoding'] = 'utf8'
+        gitlab_rails['db_host'] = 'my-aurora-cluster-here.rds.amazonaws.com'
+        gitlab_rails['db_port'] = 5432
+        gitlab_rails['db_username'] = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        gitlab_rails['db_password'] = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        gitlab_rails['db_database'] = 'gitlabdb'
 
         # https://docs.gitlab.com/ee/administration/monitoring/prometheus/
         # https://gitlab.com/gitlab-org/grafana-dashboards/tree/master/omnibus
